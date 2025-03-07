@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask + MongoDB Frontend</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto">
+        <h1 id="welcome-message" class="text-3xl font-bold mb-8 text-center">Loading welcome message...</h1>
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-xl font-semibold mb-4">Add Data</h2>
+            <form id="data-form" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                </div>
+                <div>
+                    <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                    <input type="number" id="age" name="age" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Submit</button>
+            </form>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4">Data from MongoDB</h2>
+            <table id="data-table" class="w-full">
+                <thead>
+                    <tr class="border-b">
+                        <th class="py-2">Name</th>
+                        <th class="py-2">Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        fetch('http://localhost:5000/api')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('welcome-message').textContent = data.message;
+            });
+
+        function fetchData() {
+            fetch('http://localhost:5000/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#data-table tbody');
+                    tableBody.innerHTML = '';
+                    data.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b';
+                        row.innerHTML = `
+                            <td class="py-2">${item.name}</td>
+                            <td class="py-2">${item.age}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                });
+        }
+
+        document.getElementById('data-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                age: parseInt(document.getElementById('age').value)
+            };
+
+            fetch('http://localhost:5000/api/data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fetchData();
+                document.getElementById('data-form').reset();
+            });
+        });
+
+        fetchData();
+    </script>
+</body>
+</html>
