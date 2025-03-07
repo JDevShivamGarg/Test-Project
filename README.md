@@ -47,6 +47,8 @@ cd Test-Project
 ```bash
 docker-compose up --build
 ```
+---
+
 ## Project Structure
 Test-Project/
 │
@@ -59,9 +61,12 @@ Test-Project/
 ├── README.md            
 └── .gitignore            
 
+---
 
 ## License
 This project is licensed under the MIT License.
+
+---
 
 ## Author
 Shivam Garg
@@ -69,6 +74,8 @@ Shivam Garg
 GitHub: JDevShivamGarg
 
 Email: shivamcp2694@gmail.com
+
+---
 
 ## Acknowledgments
 Flask Documentation: https://flask.palletsprojects.com/
