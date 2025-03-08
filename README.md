@@ -51,7 +51,7 @@ docker-compose up --build
 
 Test-Project      
 │   
-├── templates      
+├── templates         
 │      └── index.html      
 ├── app.py      
 ├── Dockerfile      
