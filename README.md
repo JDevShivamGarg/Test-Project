@@ -50,15 +50,15 @@ docker-compose up --build
 ---
 
 Test-Project   
-│   
+│
+├── templates   
+│      └── index.html   
 ├── app.py   
-├── requirements.txt   
 ├── Dockerfile   
-├── docker-compose.yml   
+├── docker-compose.yml
+├── requirements.txt   
 ├── README.md            
-├── .gitignore   
-└── templates   
-      └── index.html   
+└── .gitignore   
 
 
 ---
