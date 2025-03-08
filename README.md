@@ -58,8 +58,7 @@ Test-Project
 ├── docker-compose.yml    
 ├── README.md            
 ├── .gitignore
-│
-└── templates          
+│── templates          
     └── index.html
 
 ---
