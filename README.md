@@ -49,15 +49,14 @@ docker-compose up --build
 ```
 ---
 
-Test-Project/
-│
+Test-Project
 ├── app.py               
 ├── requirements.txt      
 ├── Dockerfile            
 ├── docker-compose.yml    
 ├── README.md            
 ├── .gitignore
-├── templates/          
+├── templates      
 │   └── index.html
 
 
