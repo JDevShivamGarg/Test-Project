@@ -1,5 +1,5 @@
 
-FROM python:3.9-slim as builder
+FROM python:slim as builder
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ COPY requirements.txt .
 RUN pip install --user -r requirements.txt
 
 
-FROM python:3.9-slim
+FROM python:slim
 
 WORKDIR /app
 
@@ -18,4 +18,4 @@ ENV PATH=/root/.local/bin:$PATH
 
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+ENTRYPOINT ["python", "app.py" ] # Replaced CMD to ENTRYPOINT

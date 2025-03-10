@@ -2,12 +2,13 @@ from flask import Flask, request, jsonify, send_from_directory
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from flask_cors import CORS
-
+import os
 app = Flask(__name__)
 CORS(app)
 
-client = MongoClient("mongodb://mongodb:27017/")
-# client = MongoClient("mongodb://localhost:27017/")
+db_url = os.getenv("MONGO_URI", "mongodb://localhost:27017")  # Default fallback for local testing
+
+client = MongoClient(db_url)
 
 db = client["mydatabase"]
 collection = db["mycollection"]
